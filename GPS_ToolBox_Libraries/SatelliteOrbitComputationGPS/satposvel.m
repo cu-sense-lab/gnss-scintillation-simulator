@@ -54,10 +54,15 @@ mkdot = n;
 E = M;
 
 error = 1;  
+nct=0;
 while error > 1e-12
     tempE = M+ecc*sin(E);
     error = abs(tempE-E);
     E = tempE;
+    nct=nct+1;
+    if nct>20
+        break
+    end
 end
 ekdot = mkdot./(1.0 - ecc*cos(E));
 tak = atan2( sqrt(1.0-ecc*ecc)*sin(E), cos(E)-ecc);

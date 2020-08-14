@@ -32,7 +32,10 @@ end
 ymid=(y(iStep(2:end))+y(iStep(1:end-1)))/2;
 CDFm=CDF(iStep(2:end));
 %Interpolate to uniform sampling
-yU=linspace(ymid(1),ymid(end),length(ymid)); 
+yU=linspace(ymid(1),ymid(end),length(ymid));
+%Test for discrete random variables
+[ymid,nU]=unique(ymid);
+CDFm=CDFm(nU);
 CDF=interp1(ymid,CDFm,yU);
 PDF=diff(filter(b,a,[0,CDF]));
 return

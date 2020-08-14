@@ -5,7 +5,7 @@ if isempty(varargin)
 else
     PROG=varargin{1};
 end
-if PROG==1;
+if PROG==1
     if j==1
         fprintf('0');
     end

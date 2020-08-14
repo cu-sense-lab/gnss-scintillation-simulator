@@ -1,35 +1,21 @@
-function [nfig]=DisplayDWT(DWT_Spec,y,y_ext,q,PlotID,nseg_locs,nskip,varargin)
-%USAGE:      DisplayDWT(DWT_Spec,y,y_ext,q,PlotID,nseg_locs,nskip,varargin)
-
-if isempty(varargin)
-    MaxOffset=10;
-    DynRange=100;
-else
-    MaxOffset=varargin{1};
-    DynRange=varargin{2};
-end
-
-ny=length(y);
-DWT_max=10*ceil(max(dB10(DWT_Spec(:)))/10)-MaxOffset;
+function [nfig,DWT_max,DynRange]=DisplayDWT(DWT,t_sec,fScale,nseg,t_seg,fileID)
+%
+DynRange=80;
+DWT_max=dB10(max(DWT(:)));
 nfig=figure;   %Display DWT segmentation
-imagesc(y/1000,log10(q),dB10(DWT_Spec(:,1:ny)))
+imagesc(t_sec/60,log10(fScale),dB10(DWT))
 grid on
-xlabel('y-km')
-ylabel('log10(1/\lambda)')
+xlabel('t-min')
+ylabel('log10(1/s_j)')
 caxis([DWT_max-DynRange, DWT_max])
 colorbar
-title([PlotID, ' DWT'])
+axisARG=[floor(min(t_sec/60)) ceil(max(t_sec/60)) min(log10(fScale)) max(log10(fScale))];
+axis(axisARG)
+title([fileID, ' DWT'])
 hold on
-nn=0;
-for nseg=nseg_locs
-    nn=nn+1;
-    if nn==1
-        ntics_max=length(nskip/2:nskip:ny);
-        nmod=floor(ntics_max/8);
-    end
-    if mod(nn,nmod)==0
-        hold on
-        text(y_ext(nseg)/1000,log10(q(1)),num2str(nn))
-    end
+for nn=1:4:length(nseg)
+    hold on
+    text(t_seg(nn)/60,log10(fScale(1))+0.25,num2str(nn))
 end
+bold_fig
 return

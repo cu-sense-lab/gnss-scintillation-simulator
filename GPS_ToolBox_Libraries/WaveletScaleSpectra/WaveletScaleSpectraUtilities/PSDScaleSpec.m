@@ -37,10 +37,11 @@ for nseg=1:nsegs
         break
     end
     data_seg=data(n1:n2);
-    %Conventional unweighted raw PSD
+    %Conventional unweighted raw PSD  <= Spectra are unscaled PDF units
+    %psd*2*pi/(dqN) for PSD units
     [psd,~] = pdgm(data_seg,nsamp_seg,noff);
     xxPSD=log10(qfft(2:nsamp_seg/2));
-    yyPSD=dB10(psd(2:nsamp_seg/2)/2);
+    yyPSD=dB10(psd(2:nsamp_seg/2));
     
     %Scale spectrum interpolated to xxPSD
     xxScale=log10(qScale);

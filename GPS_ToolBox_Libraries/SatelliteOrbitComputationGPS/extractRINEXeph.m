@@ -1,4 +1,4 @@
-function       eph=extractRINEXeph(year,day_of_year,PRN)
+function       [eph,ephfile]=extractRINEXeph(year,day_of_year,PRN)
 %USAGE:  eph=extractRINEXeph(year,day_of_year,PRN)
 %Extract RINEX ephemeris file from website:
 %ftp://cddis.gsfc.nasa.gov/gnss/data/daily/YYYY/DDD/YYn/brdcDDD0.YYn.Z
@@ -21,8 +21,6 @@ if ~exist(ephfile,'file')
     end
     fprintf('Unzip %s   then type dbcont \n',ephfile)
     keyboard
-else
-   fprintf('Using ephemeris file %s \n',ephfile)
 end
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 [eph,~] =rinexe(ephfile); %Extract 21XN ephemeris files

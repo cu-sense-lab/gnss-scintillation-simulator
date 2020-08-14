@@ -30,7 +30,7 @@ vsat_ecf=zeros(3,nsamps);
 for nsamp=1:nsamps            %Calculate ecf position & velocity    
     [ xsat_ecf(:,nsamp), vsat_ecf(:,nsamp)]=satposvel(GPSTime(2,nsamp),eph);  % changed by Joy
 end
-sat_llh=ecf2llhT(sat_ecf);                %ECF to geodetic (llh)  
+sat_llh=ecf2llhT(xsat_ecf);                %ECF to geodetic (llh)  
 sat_tcs=llh2tcsT(sat_llh,origin_llh);  %llh to tcs at origin_llh
 sat_elev=atan2(sat_tcs(3,:),sqrt(sat_tcs(1,:).^2+sat_tcs(2,:).^2));
 

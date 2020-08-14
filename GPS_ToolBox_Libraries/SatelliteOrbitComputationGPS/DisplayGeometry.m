@@ -135,6 +135,7 @@ if SAVE_PLOTS==1
     saveas(gcf,[fig_dir,'\prop_BP-GFAC-veff'],'jpg')
 end
 
+if 0
 figure
 scale=1;
 for nn=ndec
@@ -152,4 +153,5 @@ axis equal
 bold_fig
 if SAVE_PLOTS==1
     saveas(gcf,[fig_dir,'\Anisotropy'],'jpg')
+end
 end

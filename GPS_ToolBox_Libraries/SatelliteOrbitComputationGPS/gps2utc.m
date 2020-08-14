@@ -43,7 +43,7 @@ if ~isnumeric(date0) %make sure date0 are datenums, if not try converting
     date0 = datenum(date0); %will error if not a proper format
 end
 
-if ~isempty(find(date0 < stepdates(1)))%date0 must all be after GPS start date
+if ~isempty(find(date0 < stepdates(1), 1))%date0 must all be after GPS start date
     error('Input dates must be after 00:00:00 on Jan 6th 1980') 
 end
 

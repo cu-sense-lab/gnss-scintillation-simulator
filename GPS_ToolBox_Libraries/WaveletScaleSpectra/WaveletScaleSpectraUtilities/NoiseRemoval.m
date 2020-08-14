@@ -5,6 +5,8 @@ datap=[f(:)',fliplr(f(:)')];
 d=nextpow2(2*ndata); n=2^d;
 if n>2*ndata
     yp=[datap,datap(2*ndata)*ones(1,n-2*ndata)];
+else
+    yp=datap;
 end
 if isempty(varargin)
     Jmin=8;

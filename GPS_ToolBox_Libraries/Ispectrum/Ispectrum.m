@@ -59,7 +59,7 @@ function [Imu,mu,S4,Cpp,nstp,result]=Ispectrum(U,p1,p2,mu0,varargin)
 
 IspecParams=generateIspecParams(U,p1,p2,mu0);
 fclose('all');      %Seems to be necessary to avoid error with multiple calls CLR Nov 2016
-[status,result]= system([[getGlobalpath2exe,'Ispectrum.exe '],IspecParams]);
+[status,result]= system([[getGlobalpath2exe,'\Ispectrum.exe '],IspecParams]);
 if status~=0
     error(result)
 end
@@ -83,7 +83,7 @@ end
 data=importdata([pwd,'\ispectrum.dat']);
 [~,ndata]=size(data);
 if ndata~=3
-    fclose('all')
+    fclose('all');
     error('Ispectrum fault ')
 else
 mu=data(:,1);
@@ -91,4 +91,6 @@ Imu=data(:,2);
 nstp=data(:,3);
 end
 fclose('all');
+delete([pwd,'\ispectrum.dat']);
+delete([pwd,'\ispectrum.log']);
 return

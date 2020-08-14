@@ -2,7 +2,8 @@ function        satGEOM_struct=GenerateGPSGeometry(tsec_data,GPSTime,UT_time,eph
 %USAGE:   satGEOM_struct=GenerateGPSGeometry(tsec_data,UT_time,eph,origin_llh,StationID,h_intercept,Drift)
 %
 %INPUTS:
-%       tsec_data  = GPS time in seconds 
+%       tsec_data  = UT in sec 
+%       GPSTime  = GPS Time in [week,time] format  
 %       UT_time    =  6 element date time for IGRF 
 %       eph             = RINEX navagation format ephemeris file
 %       origin_llh    = station  [latitude (rad); longitude( rad); height (m)]
@@ -49,9 +50,11 @@ end
 nsamps=length(tsec_data);
 xsat_ecf=zeros(3,nsamps);
 vsat_ecf=zeros(3,nsamps);
-n1=size(GPSTime);
-if n1==2
-    GPSTime=GPSTime(2,:);
+ns=size(GPSTime);
+if ns(1)==2
+    GPSTime=GPSTime(1,:);
+else
+    error('GPSTime format error ')
 end
 for nsamp=1:nsamps            %Calculate ecf position & velocity    
     [ xsat_ecf(:,nsamp), vsat_ecf(:,nsamp)]=satposvel(GPSTime(1,nsamp),eph);  % changed by Joy
@@ -75,7 +78,7 @@ usat_tcs=sat_tcs./repmat(sat_rnge,3,1);
 sat_rdot=sum(vsat_tcs.*usat_tcs);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-fprintf('Calculating %6.2f km penetration points \n',h_intercept/1000)
+%fprintf('Calculating %6.2f km penetration points \n',h_intercept/1000)
 %Intercept point geometry
 satp_llh   = findIntercept(h_intercept,usat_tcs,sat_rnge,origin_llh);
 satp_tcs = llh2tcsT(satp_llh,origin_llh);
@@ -99,8 +102,8 @@ for nsegs=1:nsamps
     vp(3,:)=-vsat_tcs(2,:).*vSF;
 end
 
-fprintf('Calculating Magnetic field at %6.2f km penetration points \n',...
-         h_intercept/1000)
+%fprintf('Calculating Magnetic field at %6.2f km penetration points \n',...
+%         h_intercept/1000)
 %Magnetic field at penetration points 
 %Inputs to igrf are deg/km!!
 time=datenum(UT_time(1),UT_time(2),UT_time(3));
@@ -131,7 +134,7 @@ thetaB=thetaB+pi/2;    %Change magnetic angle ref to horizontal.  CLR 2/13/2016
     [A,B,C]=ABC(thetap,phip,thetaB,phiB,gam_b,a,b);
 
 veff=sqrt((C.*vkyz(1,:).^2-B.*vkyz(1,:).*vkyz(2,:)+A.*vkyz(2,:).^2)./(A.*C-B.^2/4));
-
+tsec_data=tsec_data(:)';
 satGEOM_struct=struct('tsec_data',tsec_data,'eph',eph,...
     'UT_time',UT_time,'origin_llh',origin_llh','StationID',StationID,...
     'h_intercept',h_intercept','a',a,'b',b,'gam_b',gam_b,'Drift',Drift,...

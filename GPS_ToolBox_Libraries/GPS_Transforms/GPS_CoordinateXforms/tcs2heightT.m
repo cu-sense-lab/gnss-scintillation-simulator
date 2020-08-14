@@ -1,4 +1,6 @@
-function [zsurf, llh_srf]=tcs2heightT(tcs, origin, varargin);
+function [zsurf, llh_srf]=tcs2heightT(~, ~, varargin)
+zsurf=[]; llh_srf=[];
+error('Obsolete use findIntercept.m')
 %
 % PURPOSE: Compute tcs z distance above surface (WGS84 ellipsoid)
 % USAGE:  [height]=tcs2height(tcs, origin) or tcs2height(tcs, origin, error)
