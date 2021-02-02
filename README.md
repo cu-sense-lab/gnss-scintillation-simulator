@@ -1,7 +1,12 @@
 # GPS Scintillation Simulator
 
 
-This package 
+This package includes code from external sources:
+
+- Files obtained from the MATLAB Central repository are licensed under BSD.
+- A subset of the Wavelab850 package is included under `matlab/WaveletScaleSpectra/Wavelab850Subset` and its copyright information can be found within the `Documentation` subfolder in that directory.
+- The IGRF model implementation by Drew Compston is included under `matlab/IGRF_Compston`, and its copyright information can be found under the REAME in that directory.
+
 
 
 Copyright 2020 CU Sense Lab
