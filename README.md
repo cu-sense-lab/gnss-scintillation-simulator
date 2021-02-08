@@ -3,7 +3,7 @@
 
 This package includes code from external sources:
 
-- Files obtained from the MATLAB Central repository are licensed under BSD.
+- Files obtained from the MATLAB Central repository are licensed under BSD.  There are LICENSE.txt files in each directory containing files downloaded from MATLAB Central that tells which files they are and what their MATLAB Central URL is.
 - A subset of the Wavelab850 package is included under `matlab/WaveletScaleSpectra/Wavelab850Subset` and its copyright information can be found within the `Documentation` subfolder in that directory.
 - The IGRF model implementation by Drew Compston is included under `matlab/IGRF_Compston`, and its copyright information can be found under the REAME in that directory.
 
