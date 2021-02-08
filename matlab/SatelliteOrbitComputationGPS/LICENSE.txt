@@ -18,13 +18,3 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 
 
-For citing the following files:
-
-gnss-scintillation-simulator/matlab/SatelliteOrbitComputationGPS/days2mdh.m
-gnss-scintillation-simulator/matlab/SatelliteOrbitComputationGPS/jday.m
-
-Please see: https://celestrak.com/software/vallado-sw.php
-
-Cite:
-
-David Vallado, "Fundamentals of Astrodynamics and Applications" Fourth Edition, 2013

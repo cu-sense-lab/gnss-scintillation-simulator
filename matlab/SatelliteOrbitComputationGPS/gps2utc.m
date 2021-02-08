@@ -9,8 +9,6 @@ function date1 = gps2utc(date0)
 %
 %	See also UTC2GPS.
 
-%   Copyright 2008 Ian M. Howat, ihowat@gmail.com
-%   $Version: 1.0 $  $Date: 23-Aug-2008 13:56:44 $
 
 %% ADD NEW LEAP DATES HERE:
 stepdates = [...
